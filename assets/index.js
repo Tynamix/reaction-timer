@@ -1,16 +1,17 @@
-
 const reactionArea = document.querySelector(".reaction-area");
 const textArea = document.querySelector(".text-area");
 let appearTime = 0;
 let reactionTime = 0;
 let startDate;
 let waitingForClick = false;
+let waitingforRedClick = false;
 let localUserName = "Test";
 let localReactionTimeArray = [];
 let localMinReactionTime = 10000;
 let localAvgReactionTime = 0;
 let currentUser = "";
 let x=0;
+let timer;
 let globalReactionTimeDataset = JSON.parse(localStorage.getItem("globalReactionTimeDataset"));
 if (!globalReactionTimeDataset){
     globalReactionTimeDataset = [{
@@ -33,7 +34,7 @@ function play(){
     document.querySelector(".instruct-text").innerHTML = "";
 
 
-    setTimeout(() => {
+    timer = setTimeout(() => {
         reactionArea.style.backgroundColor = "green";
         document.querySelector(".upper-text").innerHTML = "...";
         document.querySelector(".lower-text").innerHTML = "CLICK!";
@@ -41,6 +42,7 @@ function play(){
         waitingForClick = true;
         startDate = Date.now();
     }, appearTime)
+    waitingforRedClick = true;
 }
 
 reactionArea.addEventListener('click', () => {
@@ -54,6 +56,16 @@ reactionArea.addEventListener('click', () => {
         document.querySelector(".upper-text").innerHTML = reactionTime;
         document.querySelector(".lower-text").innerHTML = "Click to keep going!";
         waitingForClick = false ;
+        waitingforRedClick = false;
+    } else if (waitingforRedClick){
+        console.log("early");
+        window.clearTimeout(timer);
+        reactionArea.style.backgroundColor = "#2596be";
+        document.querySelector(".upper-text").innerHTML = "BOOOOOOOO";
+        document.querySelector(".lower-text").innerHTML = "You CLICKED early";
+        document.querySelector(".instruct-text").innerHTML = "Click Again to keep going";
+        waitingforRedClick = false;
+        waitingForClick = false;
     } else {
         play();
     }
@@ -64,13 +76,13 @@ document.querySelector(".submit-button").addEventListener('click',() => {
     console.log(currentUser);
     let j=0;
     x = 0;
-    //let globalReactionTimeDataset = JSON.parse(localStorage["globalReactionTimeDataset"]);
     globalReactionTimeDataset.forEach(session => {
         j = j+1;
         if(session.userName === currentUser){
             x = j;
         }
     })
+    if(!(localMinReactionTime === 10000)){
     if(x === 0){
         globalReactionTimeDataset.push({
             userName : currentUser,
@@ -93,7 +105,7 @@ document.querySelector(".submit-button").addEventListener('click',() => {
         localAvgReactionTime = 0;
         localMinReactionTime = 10000;
         localAvgReactionTime = 0;
-    }
+    }}
     localStorage["globalReactionTimeDataset"] = JSON.stringify(globalReactionTimeDataset);
     populateAverageTimeLeaderboard();
     populateMinTimeLeaderboard();
