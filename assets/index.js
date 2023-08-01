@@ -5,7 +5,7 @@ let appearTime = 0;
 let reactionTime = 0;
 let startDate;
 let waitingForClick = false;
-let localUserName = "Samarth";
+let localUserName = "Test";
 let localReactionTimeArray = [];
 let localMinReactionTime = 10000;
 let localAvgReactionTime = 0;
@@ -14,7 +14,7 @@ let x=0;
 let globalReactionTimeDataset = JSON.parse(localStorage.getItem("globalReactionTimeDataset"));
 if (!globalReactionTimeDataset){
     globalReactionTimeDataset = [{
-    userName : "Samarth",
+    userName : "Test",
     reactionTimeArray : [],
     minReactionTime : 10000,
     avgReactionTime : 0,
@@ -109,7 +109,7 @@ function populateAverageTimeLeaderboard(){
     });
     document.querySelector(".averageOL").innerHTML = ""
     for(let k=0;k<sortedTempArray.length;k++){
-        if(sortedTempArray[k].userName === "Samarth"){
+        if(sortedTempArray[k].userName === "Test"){
             continue;
         }
         const listItem = document.createElement('li');
@@ -129,7 +129,7 @@ function populateMinTimeLeaderboard(){
     });    
     document.querySelector(".minOL").innerHTML = ""
     for(let k=0;k<sortedTempArray.length;k++){
-        if(sortedTempArray[k].userName === "Samarth"){
+        if(sortedTempArray[k].userName === "Test"){
             continue;
         }
         const listItem = document.createElement('li');

@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="index.css" rel="stylesheet">
+        <link href="../assets/index.css" rel="stylesheet">
         <title>
             Reaction Benchmark
         </title>
@@ -13,16 +13,18 @@
         <div class="wrapper">
             <div class="reaction-area">
                 <div class="text-area">
-                    <img src="skull.png">
+                    <img src="../assets/skull.png">
                     <p class="upper-text font">This is a REACTION TIME Test</p>
-                    <p class="lower-text font">Click anywhere to start the test</p>
-                    <p class="instruct-text font">Click the area when RED turns GREEN</p>
+                    <p class="lower-text font">Click the area when RED turns GREEN</p>
+                    <p class="instruct-text font">Click anywhere to start the test</p>
                 </div>
             </div>
             <div class="form">
                 <form class="name-form">
-                    <input type="text" class="current-user"/>
+                    <p class = "name-form-text font">Enter your NAME below AFTER taking the TEST and PRESS SUBMIT </p>
+                    <span><input type="text" class="current-user"/>
                     <button class="submit-button" type="button">SUBMIT</button>
+                    </span>
                 </form>
             </div>
             <div class="leader-board">
@@ -30,7 +32,6 @@
                     <div class="averageTimeLeaderboard">
                         <div class="averageTimeLeaderboard-header">
                             <h2>Average Time Leaderboard</h2>
-                            <input type="button" value="Refresh" onclick="populateAverageTimeLeaderboard()">
                         </div>
                     </div>
                     <ol class="averageOL">
@@ -40,7 +41,6 @@
                     <div class="minTimeLeaderboard">
                         <div class="minTimeLeaderboard-header">
                             <h2>Minimum Time Leaderboard</h2>
-                            <button onclick="populateMinTimeLeaderboard()">Refresh</button>
                         </div>
                     </div>
                     <ol class="minOL">
@@ -48,6 +48,6 @@
                 </div>
             </div>
         </div>
-        <script src="index.js"></script>
+        <script src="../assets/index.js"></script>
     </body>
 </htm
