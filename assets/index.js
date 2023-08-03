@@ -5,12 +5,9 @@ let reactionTime = 0;
 let startDate;
 let waitingForClick = false;
 let waitingforRedClick = false;
-let localUserName = "Test";
 let localReactionTimeArray = [];
 let localMinReactionTime = 10000;
 let localAvgReactionTime = 0;
-let currentUser = "";
-let x=0;
 let timer;
 
 const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
@@ -20,14 +17,14 @@ function play(){
 
     reactionArea.style.backgroundColor = "red";
     document.querySelector(".upper-text").innerHTML = "...";
-    document.querySelector(".lower-text").innerHTML = "Wait for It!"
+    document.querySelector(".lower-text").innerHTML = "Achtung!"
     document.querySelector(".instruct-text").innerHTML = "";
 
 
     timer = setTimeout(() => {
         reactionArea.style.backgroundColor = "green";
-        document.querySelector(".upper-text").innerHTML = "...";
-        document.querySelector(".lower-text").innerHTML = "CLICK!";
+        document.querySelector(".upper-text").innerHTML = "!!!";
+        document.querySelector(".lower-text").innerHTML = "KLICKEN!";
         document.querySelector(".instruct-text").innerHTML = "";
         waitingForClick = true;
         startDate = Date.now();
@@ -44,16 +41,16 @@ reactionArea.addEventListener('click', () => {
         console.log(localReactionTimeArray, localMinReactionTime, localAvgReactionTime);
         reactionArea.style.backgroundColor = "#2596be";
         document.querySelector(".upper-text").innerHTML = reactionTime;
-        document.querySelector(".lower-text").innerHTML = "Click to keep going!";
+        document.querySelector(".lower-text").innerHTML = "Klicken ums nochmal zu versuchen!";
         waitingForClick = false ;
         waitingforRedClick = false;
     } else if (waitingforRedClick){
         console.log("early");
         window.clearTimeout(timer);
         reactionArea.style.backgroundColor = "#2596be";
-        document.querySelector(".upper-text").innerHTML = "BOOOOOOOO";
-        document.querySelector(".lower-text").innerHTML = "You CLICKED early";
-        document.querySelector(".instruct-text").innerHTML = "Click Again to keep going";
+        document.querySelector(".upper-text").innerHTML = "UUUPPPSSS";
+        document.querySelector(".lower-text").innerHTML = "Das war zu früh! Du darfst erst klicken wenn es grün wird";
+        document.querySelector(".instruct-text").innerHTML = "Klicken ums nochmal zu versuchen!";
         waitingforRedClick = false;
         waitingForClick = false;
     } else {
