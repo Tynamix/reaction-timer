@@ -16,8 +16,8 @@ body{
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
     background-color:#2596be;
-    flex-direction: column;
     width: 100vw;
     height: 100vh;
 }
@@ -27,16 +27,14 @@ body{
     color: whitesmoke;
 }
 .upper-text{
-    font-size: 3em;
+    font-size: xx-large;
     font-weight: 700;
-    margin-bottom: -4vh;
 }
 .lower-text{
     font-weight: 500;
-    font-size: 2.5em;
-    margin-bottom: -0.2vh;
+    font-size: xx-large;
 }
 .instruct-text{
     font-weight: 300;
-    font-size: 1.5em;
+    font-size: large;
 }
