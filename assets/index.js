@@ -12,16 +12,6 @@ let localAvgReactionTime = 0;
 let currentUser = "";
 let x=0;
 let timer;
-let globalReactionTimeDataset = JSON.parse(localStorage.getItem("globalReactionTimeDataset"));
-if (!globalReactionTimeDataset){
-    globalReactionTimeDataset = [{
-    userName : "Test",
-    reactionTimeArray : [],
-    minReactionTime : 10000,
-    avgReactionTime : 0,
-}];
-}
-console.log(globalReactionTimeDataset);
 
 const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
 
@@ -70,83 +60,3 @@ reactionArea.addEventListener('click', () => {
         play();
     }
 });
-
-document.querySelector(".submit-button").addEventListener('click',() => {
-    currentUser = document.querySelector(".current-user").value;
-    console.log(currentUser);
-    let j=0;
-    x = 0;
-    globalReactionTimeDataset.forEach(session => {
-        j = j+1;
-        if(session.userName === currentUser){
-            x = j;
-        }
-    })
-    if(!(localMinReactionTime === 10000)){
-    if(x === 0){
-        globalReactionTimeDataset.push({
-            userName : currentUser,
-            reactionTimeArray :localReactionTimeArray,
-            minReactionTime : localMinReactionTime,
-            avgReactionTime : localAvgReactionTime,
-        });
-        console.log(globalReactionTimeDataset);
-        localReactionTimeArray = [];
-        localAvgReactionTime = 0;
-        localMinReactionTime = 10000;
-        localAvgReactionTime = 0;
-    } else {
-        globalReactionTimeDataset[x-1].reactionTimeArray = globalReactionTimeDataset[x-1].reactionTimeArray.concat(localReactionTimeArray);
-        globalReactionTimeDataset[x-1].avgReactionTime = Math.round(localAvgReactionTime * 100) / 100;
-        globalReactionTimeDataset[x-1].minReactionTime = localMinReactionTime;
-        globalReactionTimeDataset[x-1].avgReactionTime = average(globalReactionTimeDataset[x-1].reactionTimeArray);
-        console.log(globalReactionTimeDataset);
-        localReactionTimeArray = [];
-        localAvgReactionTime = 0;
-        localMinReactionTime = 10000;
-        localAvgReactionTime = 0;
-    }}
-    localStorage["globalReactionTimeDataset"] = JSON.stringify(globalReactionTimeDataset);
-    populateAverageTimeLeaderboard();
-    populateMinTimeLeaderboard();
-});
-
-function populateAverageTimeLeaderboard(){
-    let globalReactionTimeDataset = JSON.parse(localStorage["globalReactionTimeDataset"]);
-    let tempArray = globalReactionTimeDataset.map(v => ({ userName: v.userName, avgReactionTime: v.avgReactionTime }));
-    let sortedTempArray = tempArray.sort(function soryArray(a, b) {
-        return b.avgReactionTime < a.avgReactionTime ?  1
-             : b.avgReactionTime > a.avgReactionTime ? -1
-             : 0;
-    });
-    document.querySelector(".averageOL").innerHTML = ""
-    for(let k=0;k<sortedTempArray.length;k++){
-        if(sortedTempArray[k].userName === "Test"){
-            continue;
-        }
-        const listItem = document.createElement('li');
-        const itemText = document.createTextNode(`${sortedTempArray[k].userName} : ${sortedTempArray[k].avgReactionTime}`);
-        listItem.appendChild(itemText);
-        document.querySelector(".averageOL").appendChild(listItem);
-    }
-}
-
-function populateMinTimeLeaderboard(){
-    let globalReactionTimeDataset = JSON.parse(localStorage["globalReactionTimeDataset"]);
-    let tempArray = globalReactionTimeDataset.map(v => ({ userName: v.userName, minReactionTime: v.minReactionTime }));
-    let sortedTempArray = tempArray.sort(function soryArray(a, b) {
-        return b.minReactionTime < a.minReactionTime ?  1
-             : b.minReactionTime > a.minReactionTime ? -1
-             : 0;
-    });    
-    document.querySelector(".minOL").innerHTML = ""
-    for(let k=0;k<sortedTempArray.length;k++){
-        if(sortedTempArray[k].userName === "Test"){
-            continue;
-        }
-        const listItem = document.createElement('li');
-        const itemText = document.createTextNode(`${sortedTempArray[k].userName} : ${sortedTempArray[k].minReactionTime}`);
-        listItem.appendChild(itemText);
-        document.querySelector(".minOL").appendChild(listItem);
-    }
-}
