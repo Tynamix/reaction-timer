@@ -26,7 +26,7 @@ body{
     background-color:#2596be;
     flex-direction: column;
     width: 100vw;
-    height: auto;
+    height: 100%;
 }
 
 .font{
@@ -51,50 +51,15 @@ body{
     width: auto;
     padding-top: 5vh;
 }
-.name-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 .name-form-text{
     display: flex;
     text-align: center;
     color: whitesmoke;
 }
-.leader-board{
-    padding: 5vh;
-    display: flex;
-    align-items: center;
-    width: 90vw;
-    flex-wrap: wrap;
-}
-.averageTimeLeaderboard-wrapper, .minTimeLeaderboard-wrapper{
-    background-color:#2f2f2f;
-    display: flex;
-    flex: auto;
-    margin: 20px;
-    flex-direction: column;
-    padding: 5px;
-    border-radius: 8px;
-    align-items: center;
-}
 
-.averageTimeLeaderboard, .minTimeLeaderboard{
-    width: 100%;
-    display: flex;
-    background-color: #2596be;
-    align-items: center;
-    color: whitesmoke;
-    font-family: 'Inter',sans-serif;
-    border-radius: 8px;
-}
 .minOL, .averageOL{
     font-size: medium;
     font-family: 'Inter';
     color: whitesmoke;
-}
-.averageTimeLeaderboard-header, .minTimeLeaderboard-header{
-    width: 100%;
-    display: inline-block;
-    text-align: center;
 }
